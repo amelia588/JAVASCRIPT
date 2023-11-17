@@ -1,0 +1,129 @@
+<<!DOCTYPE html>
+<html lang="es">
+<head>
+    <title>Consulta de Matriculas</title>
+    <!-- Agrega enlaces a los archivos de Bootstrap -->
+    <link rel="stylesheet" href="ruta/a/bootstrap.min.css">
+    <script src="ruta/a/bootstrap.min.js"></script>
+</head>
+<body>
+    <div class="container">
+        <h1 class="mt-4">Consulta de Matriculas</h1>
+        <form method="post" action="">
+            <div class="form-group">
+                <label for="grado">Grado:</label>
+                <!-- Utiliza un campo de selección (select) con opciones de grado -->
+                <select class="form-control" name="grado" id="grado" required>
+                    <option value="Primero A">Primero A</option>
+                    <option value="Segundo B">Segundo B</option>
+                    <option value="Tercero C">Tercero C</option>
+                    <option value="Cuarto A">Cuarto A</option>
+                    <option value="Quinto B">Quinto B</option>
+                    <!-- Agrega más opciones según tus necesidades -->
+                </select>
+            </div>
+            <button type="submit" class="btn btn-primary">Consultar</button>
+        </form>
+
+        <?php
+        // Inicializa las variables
+        $resultados = array();
+
+        // Verifica si se ha enviado un grado
+        if (isset($_POST['grado'])) {
+            // Conexión a la base de datos (reemplaza con tus propios datos de conexión)
+            $host = 'localhost';
+            $usuario = 'root';
+            $contrasena = '';
+            $base_de_datos = 'amelia'; // Reemplaza con el nombre de tu base de datos
+
+            $conexion = new mysqli($host, $usuario, $contrasena, $base_de_datos);
+
+            // Verifica la conexión
+            if ($conexion->connect_error) {
+                die('Error de conexión: ' . $conexion->connect_error);
+            }
+
+            // Obtener el grado ingresado
+            $grado = $_POST['grado'];
+
+            // Consulta SQL para seleccionar los datos de la tabla "matriculas" y relacionar otras tablas
+            $consulta = "SELECT 
+                p.nombre AS nombre_alumno,
+                c.nombre_curso AS nombre_curso,
+                a.carrera AS carrera,
+                ca.nota AS nota
+            FROM
+                matriculas m
+                JOIN alumnos a ON m.idalumno = a.idalumno
+                JOIN cursos_alumnos ca ON m.idalumno = ca.idalumno
+                JOIN cursos c ON ca.idcurso = c.idcurso
+                JOIN personas p ON a.idpersona = p.idpersona
+            WHERE
+                m.grado = '$grado'";
+
+            // Ejecutar la consulta
+            $resultado = $conexion->query($consulta);
+
+            // Almacena los resultados en un arreglo
+            if ($resultado->num_rows > 0) {
+                while ($fila = $resultado->fetch_assoc()) {
+                    $resultados[] = $fila;
+                }
+            }
+
+            // Cerrar la conexión a la base de datos
+            $conexion->close();
+        }
+        ?>
+
+        <!-- Mostrar resultados si existen -->
+        <?php if (!empty($resultados)) { ?>
+            <h2 class="mt-4">Resultados de la Consulta</h2>
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>Nombre del Alumno</th>
+                        <th>Nombre del Curso</th>
+                        <th>Carrera</th>
+                        <th>Nota</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php foreach ($resultados as $fila) { ?>
+                        <tr data-toggle="modal" data-target="#detalleModal">
+                            <td><?php echo $fila['nombre_alumno']; ?></td>
+                            <td><?php echo $fila['nombre_curso']; ?></td>
+                            <td><?php echo $fila['carrera']; ?></td>
+                            <td><?php echo $fila['nota']; ?></td>
+                        </tr>
+                    <?php } ?>
+                </tbody>
+            </table>
+        <?php } else if (isset($_POST['grado'])) { ?>
+            <p class="mt-4">No se encontraron resultados para el grado especificado.</p>
+        <?php } ?>
+    </div>
+
+    <!-- Modal para mostrar detalles -->
+    <div class="modal fade" id="detalleModal" tabindex="-1" role="dialog" aria-labelledby="detalleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="detalleModalLabel">Detalles del Alumno</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Cerrar">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <!-- Aquí puedes mostrar más detalles del alumno si es necesario -->
+                    <p>Detalles del alumno seleccionado.</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

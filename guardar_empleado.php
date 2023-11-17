@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Formulario de Empleado</title>
+    <!-- Agregar referencia al archivo de Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        /* Estilo personalizado para el fondo de la página */
+        body {
+            background-image: url('colores.jpg'); /* Ruta de la imagen de fondo */
+            background-size: cover; /* Ajusta la imagen al tamaño de la ventana del navegador */
+            background-repeat: no-repeat; /* Evita que la imagen se repita */
+            background-attachment: fixed; /* Fija la imagen de fondo */
+            background-position: center; /* Centra la imagen */
+        }
+
+        /* Estilo personalizado para el contenedor del formulario */
+        .container {
+            background-color: rgba(255, 255, 255, 0.8); /* Fondo semitransparente */
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+            margin-top: 30px;
+            margin-bottom: 30px;
+        }
+
+        /* Estilo personalizado para agregar margen a las etiquetas de los campos */
+        label {
+            margin-bottom: 5px;
+        }
+
+        /* Estilo personalizado para agregar margen a los campos de entrada y al botón */
+        .form-control,
+        .btn {
+            margin-bottom: 15px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Formulario de Empleado</h1>
+        <form action="guardar_empleado.php" method="POST">
+            <div class="form-group">
+                <label for="num_matricula">Número de Matrícula:</label>
+                <input type="text" class="form-control" id="num_matricula" name="num_matricula" required>
+            </div>
+
+            <div class="form-group">
+                <label for="nombre">Nombre:</label>
+                <input type="text" class="form-control" id="nombre" name="nombre" required>
+            </div>
+
+            <div class="form-group">
+                <label for="direccion">Dirección:</label>
+                <input type="text" class="form-control" id="direccion" name="direccion" required>
+            </div>
+
+            <div class="form-group">
+                <label for="cod_depto">Departamento:</label>
+                <select class="form-control" id="cod_depto" name="cod_depto" required>
+                    <?php
+                    // Conexión a la base de datos
+                    $servername = "localhost";
+                    $username = "root";
+                    $password = "";
+                    $dbname = "amelia";
+
+                    $conn = new mysqli($servername, $username, $password, $dbname);
+
+                    if ($conn->connect_error) {
+                        die("La conexión a la base de datos falló: " . $conn->connect_error);
+                    }
+
+                    // Consulta SQL para obtener los departamentos
+                    $sql = "SELECT Cod_depto, nombre_depto FROM departamentos";
+                    $result = $conn->query($sql);
+
+                    if ($result->num_rows > 0) {
+                        while ($row = $result->fetch_assoc()) {
+                            echo "<option value='" . $row["Cod_depto"] . "'>" . $row["nombre_depto"] . "</option>";
+                        }
+                    } else {
+                        echo "No se encontraron departamentos.";
+                    }
+
+                    $conn->close();
+                    ?>
+                </select>
+            </div>
+
+            <button type="submit" class="btn btn-primary">Guardar</button>
+        </form>
+    </div>
+</body>
+</html>

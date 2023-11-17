@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Formulario de Buses</title>
+    <link rel="stylesheet" href="style4.css" />
+    <script src="https://kit.fontawesome.com/906bb78aae.js" crossorigin="anonymous"></script>
+  </head>
+  <body>
+    <div class="hero">
+        <h1>Formulario de Buses</h1>
+      <form action="guardar_bus.php" method="post">
+        <div class="row">
+          <div class="input-group">
+            <input type="text" id="matricula" name="matricula" required>
+            <label for="matricula"><i class="fas fa-bus"></i> Matrícula</label>
+          </div>
+          <div class="input-group">
+            <input type="text" id="modelo" name="modelo" required>
+            <label for="modelo"><i class="fas fa-car"></i> Modelo</label>
+          </div>
+        </div>
+        <div class="input-group">
+          <input type="number" id="capacidad" name="capacidad" required>
+          <label for="capacidad"><i class="fas fa-users"></i> Capacidad</label>
+        </div>
+        <div class="input-group">
+          <input type="text" id="tel_constancia" name="tel_constancia" required>
+          <label for="tel_constancia"><i class="fas fa-phone"></i> Teléfono de Constancia</label>
+        </div>
+        <div class="input-group">
+          <input type="text" id="tipo" name="tipo" required>
+          <label for="tipo"><i class="fas fa-bus-alt"></i> Tipo</label>
+        </div>
+        <button type="submit">ENVIAR <i class="fas fa-paper-plane"></i></button>
+      </form>
+    </div>
+  </body>
+</html>

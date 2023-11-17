@@ -1,0 +1,85 @@
+* {
+    margin: 0;
+    padding: 0;
+    font-family: "poppins", sans-serif;
+    box-sizing: border-box;
+  }
+  
+  .hero {
+    width: 100%;
+    height: 100vh;
+    background-color: #3498db; /* Cambia el color de fondo a azul (#3498db) */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  form {
+    width: 90%;
+    max-width: 600px;
+    background-color: #fff; /* Cambia el color de fondo del formulario a blanco (#fff) */
+    padding: 20px;
+    border-radius: 5px;
+  }
+  
+  .input-group {
+    margin-bottom: 20px; /* Reduzco el espacio entre los campos */
+    position: relative;
+  }
+  
+  input,
+  textarea {
+    width: 100%;
+    padding: 10px;
+    outline: 0;
+    border: 1px solid #ccc; /* Cambio el color del borde a gris (#ccc) */
+    color: #333; /* Cambio el color del texto a un gris más oscuro (#333) */
+    background: #f2f2f2; /* Cambio el color de fondo a un gris más claro (#f2f2f2) */
+    font-size: 15px;
+  }
+  
+  label {
+    height: 100%;
+    position: absolute;
+    left: 0;
+    top: 0;
+    padding: 10px;
+    color: #333; /* Cambio el color de las etiquetas a gris más oscuro (#333) */
+    cursor: text;
+    transition: 0.2s;
+  }
+  
+  button {
+    padding: 10px 0;
+    color: #fff;
+    outline: none;
+    background: #3498db; /* Cambia el color de fondo del botón a azul (#3498db) */
+    border: none;
+    width: 100%;
+    cursor: pointer;
+  }
+  
+  input:focus ~ label,
+  input:valid ~ label,
+  textarea:focus ~ label,
+  textarea:valid ~ label {
+    top: -35px;
+    font-size: 14px;
+  }
+  
+  .row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  
+  .row .input-group {
+    flex-basis: 48%;
+  }
+  
+  h1 {
+    font-size: 24px; /* Tamaño del título */
+    color: #fff; /* Color del texto */
+    margin-bottom: 20px; /* Espacio entre el título y el formulario */
+  }
+    

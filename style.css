@@ -1,0 +1,138 @@
+@import "https://fonts.googleapis.com/css?family=Ubuntu:400,700italic";
+@import "https://fonts.googleapis.com/css?family=Cabin:400";
+
+/* Colores personalizados */
+:root {
+  --stark-light-blue: #00fffc;
+  --stark-med-blue: #00a4a2;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  background: #000;
+  background-size: cover;
+  font-size: 10px;
+  height: 100%;
+  overflow: hidden;
+  position: absolute;
+  text-align: center;
+  width: 100%;
+}
+
+/* Logo */
+#logo {
+  animation: logo-entry 4s ease-in;
+  width: 500px;
+  margin: 0 auto;
+  position: relative;
+  z-index: 40;
+}
+
+h1 {
+  animation: text-glow 2s ease-out infinite alternate;
+  font-family: 'Ubuntu', sans-serif;
+  color: var(--stark-med-blue);
+  font-size: 4.8rem;
+  font-weight: bold;
+  position: absolute;
+  text-shadow: 0 0 10px #e5d3d3, 0 0 20px #ccbcbc, 0 0 30px #ccc2c2, 0 0 40px #e4dcdc, 0 0 50px #e7e0e0, 0 0 60px #fcf0f0, 0 0 70px #e9e0e0;
+  top: 50px;
+}
+
+/* Log in form */
+#fade-box {
+  animation: input-entry 3s ease-in;
+  z-index: 4;
+}
+
+.stark-login {
+  background: linear-gradient(#004746, #111);
+  border: 6px solid var(--stark-med-blue);
+  box-shadow: 0 0 15px var(--stark-light-blue);
+  border-radius: 5px;
+  display: inline-block;
+  height: 220px;
+  margin: 200px auto 0;
+  position: relative;
+  z-index: 4;
+  width: 500px;
+  transition: 1s all;
+}
+
+.stark-login:hover {
+  border: 6px solid var(--stark-light-blue);
+  box-shadow: 0 0 25px var(--stark-light-blue);
+  transition: 1s all;
+}
+
+input {
+  background: linear-gradient(#333, #222);
+  border: 1px solid #444;
+  border-radius: 5px;
+  box-shadow: 0 2px 0 #000;
+  color: #888;
+  display: block;
+  font-family: 'Cabin', helvetica, arial, sans-serif;
+  font-size: 1.3rem;
+  height: 40px;
+  margin: 20px auto 10px;
+  padding: 0 10px;
+  text-shadow: 0 -1px 0 #000;
+  width: 400px;
+}
+
+input:focus {
+  animation: box-glow 1s ease-out infinite alternate;
+  background: #0B4252;
+  background: linear-gradient(#333933, #222922);
+  border-color: var(--stark-light-blue);
+  box-shadow: 0 0 5px rgba(0, 255, 253, .2), inset 0 0 5px rgba(0, 255, 253, .1), 0 2px 0 #000;
+  color: #efe;
+  outline: none;
+}
+
+input:invalid {
+  border: 2px solid red;
+  box-shadow: 0 0 5px rgba(255, 0, 0, .2), inset 0 0 5px rgba(255, 0, 0, .1), 0 2px 0 #000;
+}
+
+button {
+  background: linear-gradient(#333, #222);
+  box-sizing: content-box;
+  border: 1px solid #444;
+  border-left-color: #000;
+  border-radius: 5px;
+  box-shadow: 0 2px 0 #000;
+  color: #fff;
+  display: block;
+  font-family: 'Cabin', helvetica, arial, sans-serif;
+  font-size: 1.3rem;
+  font-weight: 400;
+  height: 40px;
+  line-height: 40px;
+  margin: 20px auto;
+  padding: 0;
+  position: relative;
+  text-shadow: 0 -1px 0 #000;
+  width: 400px;
+  transition: 1s all;
+}
+
+button:hover,
+button:focus {
+  background: #0C6125;
+  background: linear-gradient(#393939, #292929);
+  color: var(--stark-light-blue);
+  outline: none;
+  transition: 1s all;
+}
+
+button:active {
+  background: #292929;
+  background: linear-gradient(#393939, #292929);
+  box-shadow: 0 1px 0 #000, inset 1px 0 1px #222;
+  top: 1px;
+}
