@@ -1,2 +1,4 @@
-let nombre = prompt("decirme tu nombre");
-alert("hola" + nombre)
+let nombre = 10;
+
+numero -=6
+document.write(numero)
